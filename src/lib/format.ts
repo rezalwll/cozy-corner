@@ -1,5 +1,6 @@
 export function toFa(value: number | string): string {
-  return String(value).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+  const digits = "۰۱۲۳۴۵۶۷۸۹".split("");
+  return String(value).replace(/\d/g, (d) => digits[Number(d)] ?? d);
 }
 
 export function formatPrice(value: number): string {
