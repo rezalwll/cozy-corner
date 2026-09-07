@@ -12,8 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as MyAccountRouteImport } from './routes/my-account'
+import { Route as OrderTrackingRouteImport } from './routes/order-tracking'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as MyAccountIndexRouteImport } from './routes/my-account.index'
 import { Route as ProductCategoryCategoryRouteImport } from './routes/product-category.$category'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 
@@ -32,6 +35,16 @@ const CheckoutRoute = CheckoutRouteImport.update({
   path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MyAccountRoute = MyAccountRouteImport.update({
+  id: '/my-account',
+  path: '/my-account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrderTrackingRoute = OrderTrackingRouteImport.update({
+  id: '/order-tracking',
+  path: '/order-tracking',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
@@ -41,6 +54,11 @@ const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
   getParentRoute: () => rootRouteImport,
+} as any)
+const MyAccountIndexRoute = MyAccountIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MyAccountRoute,
 } as any)
 const ProductCategoryCategoryRoute = ProductCategoryCategoryRouteImport.update({
   id: '/product-category/$category',
@@ -57,29 +75,37 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/my-account': typeof MyAccountRouteWithChildren
+  '/order-tracking': typeof OrderTrackingRoute
   '/search': typeof SearchRoute
   '/shop': typeof ShopRoute
   '/product-category/$category': typeof ProductCategoryCategoryRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/my-account/': typeof MyAccountIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/order-tracking': typeof OrderTrackingRoute
   '/search': typeof SearchRoute
   '/shop': typeof ShopRoute
   '/product-category/$category': typeof ProductCategoryCategoryRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/my-account': typeof MyAccountIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/my-account': typeof MyAccountRouteWithChildren
+  '/order-tracking': typeof OrderTrackingRoute
   '/search': typeof SearchRoute
   '/shop': typeof ShopRoute
   '/product-category/$category': typeof ProductCategoryCategoryRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/my-account/': typeof MyAccountIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,34 +113,44 @@ export interface FileRouteTypes {
     | '/'
     | '/cart'
     | '/checkout'
+    | '/my-account'
+    | '/order-tracking'
     | '/search'
     | '/shop'
     | '/product-category/$category'
     | '/product/$slug'
+    | '/my-account/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/cart'
     | '/checkout'
+    | '/order-tracking'
     | '/search'
     | '/shop'
     | '/product-category/$category'
     | '/product/$slug'
+    | '/my-account'
   id:
     | '__root__'
     | '/'
     | '/cart'
     | '/checkout'
+    | '/my-account'
+    | '/order-tracking'
     | '/search'
     | '/shop'
     | '/product-category/$category'
     | '/product/$slug'
+    | '/my-account/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  MyAccountRoute: typeof MyAccountRouteWithChildren
+  OrderTrackingRoute: typeof OrderTrackingRoute
   SearchRoute: typeof SearchRoute
   ShopRoute: typeof ShopRoute
   ProductCategoryCategoryRoute: typeof ProductCategoryCategoryRoute
@@ -144,6 +180,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/my-account': {
+      id: '/my-account'
+      path: '/my-account'
+      fullPath: '/my-account'
+      preLoaderRoute: typeof MyAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/order-tracking': {
+      id: '/order-tracking'
+      path: '/order-tracking'
+      fullPath: '/order-tracking'
+      preLoaderRoute: typeof OrderTrackingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
@@ -157,6 +207,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/my-account/': {
+      id: '/my-account/'
+      path: '/'
+      fullPath: '/my-account/'
+      preLoaderRoute: typeof MyAccountIndexRouteImport
+      parentRoute: typeof MyAccountRoute
     }
     '/product-category/$category': {
       id: '/product-category/$category'
@@ -175,10 +232,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface MyAccountRouteChildren {
+  MyAccountIndexRoute: typeof MyAccountIndexRoute
+}
+
+const MyAccountRouteChildren: MyAccountRouteChildren = {
+  MyAccountIndexRoute: MyAccountIndexRoute,
+}
+
+const MyAccountRouteWithChildren = MyAccountRoute._addFileChildren(
+  MyAccountRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  MyAccountRoute: MyAccountRouteWithChildren,
+  OrderTrackingRoute: OrderTrackingRoute,
   SearchRoute: SearchRoute,
   ShopRoute: ShopRoute,
   ProductCategoryCategoryRoute: ProductCategoryCategoryRoute,
