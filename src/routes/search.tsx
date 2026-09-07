@@ -27,9 +27,7 @@ function SearchPage() {
   return (
     <ShopTemplate
       title={q ? `نتایج جستجو برای «${q}»` : "جستجو"}
-      description={
-        results.length === 0 ? "محصولی مطابق با جستجوی شما پیدا نشد." : undefined
-      }
+      description={results.length === 0 ? "محصولی مطابق با جستجوی شما پیدا نشد." : ""}
       products={results}
       crumbs={[{ label: "جستجو" }]}
     />
