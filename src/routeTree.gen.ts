@@ -17,6 +17,9 @@ import { Route as OrderTrackingRouteImport } from './routes/order-tracking'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as MyAccountIndexRouteImport } from './routes/my-account.index'
+import { Route as MyAccountAddressesRouteImport } from './routes/my-account.addresses'
+import { Route as MyAccountEditAccountRouteImport } from './routes/my-account.edit-account'
+import { Route as MyAccountOrdersRouteImport } from './routes/my-account.orders'
 import { Route as ProductCategoryCategoryRouteImport } from './routes/product-category.$category'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 
@@ -60,6 +63,21 @@ const MyAccountIndexRoute = MyAccountIndexRouteImport.update({
   path: '/',
   getParentRoute: () => MyAccountRoute,
 } as any)
+const MyAccountAddressesRoute = MyAccountAddressesRouteImport.update({
+  id: '/addresses',
+  path: '/addresses',
+  getParentRoute: () => MyAccountRoute,
+} as any)
+const MyAccountEditAccountRoute = MyAccountEditAccountRouteImport.update({
+  id: '/edit-account',
+  path: '/edit-account',
+  getParentRoute: () => MyAccountRoute,
+} as any)
+const MyAccountOrdersRoute = MyAccountOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => MyAccountRoute,
+} as any)
 const ProductCategoryCategoryRoute = ProductCategoryCategoryRouteImport.update({
   id: '/product-category/$category',
   path: '/product-category/$category',
@@ -79,6 +97,9 @@ export interface FileRoutesByFullPath {
   '/order-tracking': typeof OrderTrackingRoute
   '/search': typeof SearchRoute
   '/shop': typeof ShopRoute
+  '/my-account/addresses': typeof MyAccountAddressesRoute
+  '/my-account/edit-account': typeof MyAccountEditAccountRoute
+  '/my-account/orders': typeof MyAccountOrdersRoute
   '/product-category/$category': typeof ProductCategoryCategoryRoute
   '/product/$slug': typeof ProductSlugRoute
   '/my-account/': typeof MyAccountIndexRoute
@@ -90,6 +111,9 @@ export interface FileRoutesByTo {
   '/order-tracking': typeof OrderTrackingRoute
   '/search': typeof SearchRoute
   '/shop': typeof ShopRoute
+  '/my-account/addresses': typeof MyAccountAddressesRoute
+  '/my-account/edit-account': typeof MyAccountEditAccountRoute
+  '/my-account/orders': typeof MyAccountOrdersRoute
   '/product-category/$category': typeof ProductCategoryCategoryRoute
   '/product/$slug': typeof ProductSlugRoute
   '/my-account': typeof MyAccountIndexRoute
@@ -103,6 +127,9 @@ export interface FileRoutesById {
   '/order-tracking': typeof OrderTrackingRoute
   '/search': typeof SearchRoute
   '/shop': typeof ShopRoute
+  '/my-account/addresses': typeof MyAccountAddressesRoute
+  '/my-account/edit-account': typeof MyAccountEditAccountRoute
+  '/my-account/orders': typeof MyAccountOrdersRoute
   '/product-category/$category': typeof ProductCategoryCategoryRoute
   '/product/$slug': typeof ProductSlugRoute
   '/my-account/': typeof MyAccountIndexRoute
@@ -117,6 +144,9 @@ export interface FileRouteTypes {
     | '/order-tracking'
     | '/search'
     | '/shop'
+    | '/my-account/addresses'
+    | '/my-account/edit-account'
+    | '/my-account/orders'
     | '/product-category/$category'
     | '/product/$slug'
     | '/my-account/'
@@ -128,6 +158,9 @@ export interface FileRouteTypes {
     | '/order-tracking'
     | '/search'
     | '/shop'
+    | '/my-account/addresses'
+    | '/my-account/edit-account'
+    | '/my-account/orders'
     | '/product-category/$category'
     | '/product/$slug'
     | '/my-account'
@@ -140,6 +173,9 @@ export interface FileRouteTypes {
     | '/order-tracking'
     | '/search'
     | '/shop'
+    | '/my-account/addresses'
+    | '/my-account/edit-account'
+    | '/my-account/orders'
     | '/product-category/$category'
     | '/product/$slug'
     | '/my-account/'
@@ -215,6 +251,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyAccountIndexRouteImport
       parentRoute: typeof MyAccountRoute
     }
+    '/my-account/addresses': {
+      id: '/my-account/addresses'
+      path: '/addresses'
+      fullPath: '/my-account/addresses'
+      preLoaderRoute: typeof MyAccountAddressesRouteImport
+      parentRoute: typeof MyAccountRoute
+    }
+    '/my-account/edit-account': {
+      id: '/my-account/edit-account'
+      path: '/edit-account'
+      fullPath: '/my-account/edit-account'
+      preLoaderRoute: typeof MyAccountEditAccountRouteImport
+      parentRoute: typeof MyAccountRoute
+    }
+    '/my-account/orders': {
+      id: '/my-account/orders'
+      path: '/orders'
+      fullPath: '/my-account/orders'
+      preLoaderRoute: typeof MyAccountOrdersRouteImport
+      parentRoute: typeof MyAccountRoute
+    }
     '/product-category/$category': {
       id: '/product-category/$category'
       path: '/product-category/$category'
@@ -233,10 +290,16 @@ declare module '@tanstack/react-router' {
 }
 
 interface MyAccountRouteChildren {
+  MyAccountAddressesRoute: typeof MyAccountAddressesRoute
+  MyAccountEditAccountRoute: typeof MyAccountEditAccountRoute
+  MyAccountOrdersRoute: typeof MyAccountOrdersRoute
   MyAccountIndexRoute: typeof MyAccountIndexRoute
 }
 
 const MyAccountRouteChildren: MyAccountRouteChildren = {
+  MyAccountAddressesRoute: MyAccountAddressesRoute,
+  MyAccountEditAccountRoute: MyAccountEditAccountRoute,
+  MyAccountOrdersRoute: MyAccountOrdersRoute,
   MyAccountIndexRoute: MyAccountIndexRoute,
 }
 
