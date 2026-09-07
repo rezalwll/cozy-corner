@@ -43,6 +43,7 @@ export function HeroSlider() {
               height={640}
               className="h-[220px] w-full object-cover sm:h-[320px] lg:h-[420px]"
             />
+            <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/20 to-transparent" />
             <div className="absolute inset-0 flex flex-col items-start justify-center gap-3 px-6 sm:px-12">
               <p className="text-[11px] tracking-[0.35em] text-white/70">NEW</p>
               <h2 className="max-w-md text-xl font-black text-white sm:text-3xl lg:text-4xl">
