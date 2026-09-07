@@ -1,24 +1,52 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HeroSlider } from "@/components/home/HeroSlider";
+import { CategoryGrid } from "@/components/home/CategoryGrid";
+import { ProductSection } from "@/components/home/ProductSection";
+import { categories, newestProducts, productsByCategory } from "@/data/products";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "الون استایل | فروشگاه پوشاک مردانه" },
+      {
+        name: "description",
+        content:
+          "خرید آنلاین پیراهن، شلوار، تیشرت، کفش و اکسسوری مردانه از فروشگاه الون استایل با ارسال سریع.",
+      },
+      { property: "og:title", content: "الون استایل | فروشگاه پوشاک مردانه" },
+      {
+        property: "og:description",
+        content: "کالکشن جدید پوشاک مردانه الون استایل؛ کیفیت، قیمت منصفانه و ارسال سریع.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function HomePage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <>
+      <HeroSlider />
+      <CategoryGrid />
+
+      <ProductSection
+        title="جدیدترین‌ها"
+        subtitle="نوترین انتخاب‌ها، مخصوص شما"
+        products={newestProducts(4)}
       />
-    </div>
+
+      {categories.slice(0, 5).map((c) => (
+        <ProductSection
+          key={c.slug}
+          title={c.name}
+          subtitle={c.description}
+          products={productsByCategory(c.slug)}
+          href={c.slug}
+          bannerImage={c.image}
+        />
+      ))}
+    </>
   );
 }

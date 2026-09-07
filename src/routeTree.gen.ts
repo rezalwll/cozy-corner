@@ -10,33 +10,187 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as MyAccountRouteImport } from './routes/my-account'
+import { Route as OrderTrackingRouteImport } from './routes/order-tracking'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as ShopRouteImport } from './routes/shop'
+import { Route as MyAccountIndexRouteImport } from './routes/my-account.index'
+import { Route as MyAccountAddressesRouteImport } from './routes/my-account.addresses'
+import { Route as MyAccountEditAccountRouteImport } from './routes/my-account.edit-account'
+import { Route as MyAccountOrdersRouteImport } from './routes/my-account.orders'
+import { Route as ProductCategoryCategoryRouteImport } from './routes/product-category.$category'
+import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyAccountRoute = MyAccountRouteImport.update({
+  id: '/my-account',
+  path: '/my-account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrderTrackingRoute = OrderTrackingRouteImport.update({
+  id: '/order-tracking',
+  path: '/order-tracking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyAccountIndexRoute = MyAccountIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MyAccountRoute,
+} as any)
+const MyAccountAddressesRoute = MyAccountAddressesRouteImport.update({
+  id: '/addresses',
+  path: '/addresses',
+  getParentRoute: () => MyAccountRoute,
+} as any)
+const MyAccountEditAccountRoute = MyAccountEditAccountRouteImport.update({
+  id: '/edit-account',
+  path: '/edit-account',
+  getParentRoute: () => MyAccountRoute,
+} as any)
+const MyAccountOrdersRoute = MyAccountOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => MyAccountRoute,
+} as any)
+const ProductCategoryCategoryRoute = ProductCategoryCategoryRouteImport.update({
+  id: '/product-category/$category',
+  path: '/product-category/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductSlugRoute = ProductSlugRouteImport.update({
+  id: '/product/$slug',
+  path: '/product/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/my-account': typeof MyAccountRouteWithChildren
+  '/order-tracking': typeof OrderTrackingRoute
+  '/search': typeof SearchRoute
+  '/shop': typeof ShopRoute
+  '/my-account/addresses': typeof MyAccountAddressesRoute
+  '/my-account/edit-account': typeof MyAccountEditAccountRoute
+  '/my-account/orders': typeof MyAccountOrdersRoute
+  '/product-category/$category': typeof ProductCategoryCategoryRoute
+  '/product/$slug': typeof ProductSlugRoute
+  '/my-account/': typeof MyAccountIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/order-tracking': typeof OrderTrackingRoute
+  '/search': typeof SearchRoute
+  '/shop': typeof ShopRoute
+  '/my-account/addresses': typeof MyAccountAddressesRoute
+  '/my-account/edit-account': typeof MyAccountEditAccountRoute
+  '/my-account/orders': typeof MyAccountOrdersRoute
+  '/product-category/$category': typeof ProductCategoryCategoryRoute
+  '/product/$slug': typeof ProductSlugRoute
+  '/my-account': typeof MyAccountIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/my-account': typeof MyAccountRouteWithChildren
+  '/order-tracking': typeof OrderTrackingRoute
+  '/search': typeof SearchRoute
+  '/shop': typeof ShopRoute
+  '/my-account/addresses': typeof MyAccountAddressesRoute
+  '/my-account/edit-account': typeof MyAccountEditAccountRoute
+  '/my-account/orders': typeof MyAccountOrdersRoute
+  '/product-category/$category': typeof ProductCategoryCategoryRoute
+  '/product/$slug': typeof ProductSlugRoute
+  '/my-account/': typeof MyAccountIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cart'
+    | '/checkout'
+    | '/my-account'
+    | '/order-tracking'
+    | '/search'
+    | '/shop'
+    | '/my-account/addresses'
+    | '/my-account/edit-account'
+    | '/my-account/orders'
+    | '/product-category/$category'
+    | '/product/$slug'
+    | '/my-account/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cart'
+    | '/checkout'
+    | '/order-tracking'
+    | '/search'
+    | '/shop'
+    | '/my-account/addresses'
+    | '/my-account/edit-account'
+    | '/my-account/orders'
+    | '/product-category/$category'
+    | '/product/$slug'
+    | '/my-account'
+  id:
+    | '__root__'
+    | '/'
+    | '/cart'
+    | '/checkout'
+    | '/my-account'
+    | '/order-tracking'
+    | '/search'
+    | '/shop'
+    | '/my-account/addresses'
+    | '/my-account/edit-account'
+    | '/my-account/orders'
+    | '/product-category/$category'
+    | '/product/$slug'
+    | '/my-account/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
+  MyAccountRoute: typeof MyAccountRouteWithChildren
+  OrderTrackingRoute: typeof OrderTrackingRoute
+  SearchRoute: typeof SearchRoute
+  ShopRoute: typeof ShopRoute
+  ProductCategoryCategoryRoute: typeof ProductCategoryCategoryRoute
+  ProductSlugRoute: typeof ProductSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +202,121 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-account': {
+      id: '/my-account'
+      path: '/my-account'
+      fullPath: '/my-account'
+      preLoaderRoute: typeof MyAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/order-tracking': {
+      id: '/order-tracking'
+      path: '/order-tracking'
+      fullPath: '/order-tracking'
+      preLoaderRoute: typeof OrderTrackingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-account/': {
+      id: '/my-account/'
+      path: '/'
+      fullPath: '/my-account/'
+      preLoaderRoute: typeof MyAccountIndexRouteImport
+      parentRoute: typeof MyAccountRoute
+    }
+    '/my-account/addresses': {
+      id: '/my-account/addresses'
+      path: '/addresses'
+      fullPath: '/my-account/addresses'
+      preLoaderRoute: typeof MyAccountAddressesRouteImport
+      parentRoute: typeof MyAccountRoute
+    }
+    '/my-account/edit-account': {
+      id: '/my-account/edit-account'
+      path: '/edit-account'
+      fullPath: '/my-account/edit-account'
+      preLoaderRoute: typeof MyAccountEditAccountRouteImport
+      parentRoute: typeof MyAccountRoute
+    }
+    '/my-account/orders': {
+      id: '/my-account/orders'
+      path: '/orders'
+      fullPath: '/my-account/orders'
+      preLoaderRoute: typeof MyAccountOrdersRouteImport
+      parentRoute: typeof MyAccountRoute
+    }
+    '/product-category/$category': {
+      id: '/product-category/$category'
+      path: '/product-category/$category'
+      fullPath: '/product-category/$category'
+      preLoaderRoute: typeof ProductCategoryCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product/$slug': {
+      id: '/product/$slug'
+      path: '/product/$slug'
+      fullPath: '/product/$slug'
+      preLoaderRoute: typeof ProductSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface MyAccountRouteChildren {
+  MyAccountAddressesRoute: typeof MyAccountAddressesRoute
+  MyAccountEditAccountRoute: typeof MyAccountEditAccountRoute
+  MyAccountOrdersRoute: typeof MyAccountOrdersRoute
+  MyAccountIndexRoute: typeof MyAccountIndexRoute
+}
+
+const MyAccountRouteChildren: MyAccountRouteChildren = {
+  MyAccountAddressesRoute: MyAccountAddressesRoute,
+  MyAccountEditAccountRoute: MyAccountEditAccountRoute,
+  MyAccountOrdersRoute: MyAccountOrdersRoute,
+  MyAccountIndexRoute: MyAccountIndexRoute,
+}
+
+const MyAccountRouteWithChildren = MyAccountRoute._addFileChildren(
+  MyAccountRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
+  MyAccountRoute: MyAccountRouteWithChildren,
+  OrderTrackingRoute: OrderTrackingRoute,
+  SearchRoute: SearchRoute,
+  ShopRoute: ShopRoute,
+  ProductCategoryCategoryRoute: ProductCategoryCategoryRoute,
+  ProductSlugRoute: ProductSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
